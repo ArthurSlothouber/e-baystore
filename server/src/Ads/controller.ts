@@ -10,4 +10,29 @@ export default class AdController {
     ) {
         return Ad.findOneById(id)
     }
+
+    @Get('/ads')
+    async allPages() {
+        const ads = await Ad.find()
+        return { ads }
+    }
+
+    @Put('/ads/:id')
+    async updateAd(
+        @Param('id') id: number,
+        @Body() update: Partial<Ad>
+    ) {
+        const ad = await Ad.findOneById(id)
+        if (!ad) throw new NotFoundError('Cannot find page')
+
+        return Ad.merge(ad, update).save()
+    }
+
+    @Post('/ads')
+    @HttpCode(201)
+    createAd(
+        @Body() ad: Ad
+    ) {
+        return ad.save()
+    }
 }

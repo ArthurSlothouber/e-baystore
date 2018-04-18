@@ -18,6 +18,19 @@ let AdController = class AdController {
     getPage(id) {
         return entity_1.default.findOneById(id);
     }
+    async allPages() {
+        const ads = await entity_1.default.find();
+        return { ads };
+    }
+    async updateAd(id, update) {
+        const ad = await entity_1.default.findOneById(id);
+        if (!ad)
+            throw new routing_controllers_1.NotFoundError('Cannot find page');
+        return entity_1.default.merge(ad, update).save();
+    }
+    createAd(ad) {
+        return ad.save();
+    }
 };
 __decorate([
     routing_controllers_1.Get('/ads/:id'),
@@ -26,6 +39,28 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], AdController.prototype, "getPage", null);
+__decorate([
+    routing_controllers_1.Get('/ads'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AdController.prototype, "allPages", null);
+__decorate([
+    routing_controllers_1.Put('/ads/:id'),
+    __param(0, routing_controllers_1.Param('id')),
+    __param(1, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], AdController.prototype, "updateAd", null);
+__decorate([
+    routing_controllers_1.Post('/ads'),
+    routing_controllers_1.HttpCode(201),
+    __param(0, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [entity_1.default]),
+    __metadata("design:returntype", void 0)
+], AdController.prototype, "createAd", null);
 AdController = __decorate([
     routing_controllers_1.JsonController()
 ], AdController);
