@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const routing_controllers_1 = require("routing-controllers");
-const controller_1 = require("./controller");
-const port = process.env.PORT || 4000;
+const controller_1 = require("./Ads/controller");
 const app = routing_controllers_1.createKoaServer({
-    controllers: [controller_1.default]
+    controllers: [
+        controller_1.default
+    ]
 });
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(4000, () => console.log('Listening on port 4000'));
 //# sourceMappingURL=index.js.map
