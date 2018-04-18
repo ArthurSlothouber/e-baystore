@@ -13,18 +13,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
-const data_1 = require("./data");
+const entity_1 = require("./entity");
 let AdController = class AdController {
-    getAd(id) {
-        return data_1.default[id];
-    }
-    updateAd(id, body) {
-        console.log(`Incoming PUT body param:`, body);
-        return data_1.default[id];
-    }
-    createAd(body) {
-        console.log(`Incoming POST body param:`, body);
-        return body;
+    getPage(id) {
+        return entity_1.default.findOneById(id);
     }
 };
 __decorate([
@@ -32,24 +24,8 @@ __decorate([
     __param(0, routing_controllers_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
-], AdController.prototype, "getAd", null);
-__decorate([
-    routing_controllers_1.Put('/ads/:id'),
-    __param(0, routing_controllers_1.Param('id')),
-    __param(1, routing_controllers_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
-    __metadata("design:returntype", Object)
-], AdController.prototype, "updateAd", null);
-__decorate([
-    routing_controllers_1.Post('/ads'),
-    routing_controllers_1.HttpCode(201),
-    __param(0, routing_controllers_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Object)
-], AdController.prototype, "createAd", null);
+    __metadata("design:returntype", void 0)
+], AdController.prototype, "getPage", null);
 AdController = __decorate([
     routing_controllers_1.JsonController()
 ], AdController);
